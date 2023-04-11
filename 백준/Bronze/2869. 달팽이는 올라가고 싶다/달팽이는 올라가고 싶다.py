@@ -2,10 +2,8 @@ import sys
 import math
 
 condition = list(map(int, sys.stdin.readline().split()))
-
-A = condition[0] 
-B = condition[1] 
-V = condition[2] 
-days = (V - B) / (A - B)  
-
-print(math.ceil(days)) 
+a = condition[0]
+b = condition[1]
+v = condition[2]
+d = (v - a) / (a - b)
+print(math.ceil(d) + 1)
