@@ -1,23 +1,23 @@
 import sys
 
-n = int(input())
-array = list(map(int, input().split()))
-
-array.sort()
+N = int(sys.stdin.readline())
+Liquid = list(map(int, sys.stdin.readline().split()))
+Liquid.sort()
 start = 0
-end = n-1
-minTake = sys.maxsize
+end = len(Liquid) - 1
+mix = sys.maxsize  # 최솟값 변수 초기화
 
 while start < end:
-    take = array[start] + array[end]
-    if abs(take) < minTake:
-        minTake = abs(take)
-        result = [array[start], array[end]]
-    if take < 0:
+    newmix = Liquid[start] + Liquid[end]
+    if abs(newmix) < mix:  # 기존의 mix값보다 new mix의 절대값이 작을떄
+        mix = abs(newmix)
+        ans = [Liquid[start], Liquid[end]]
+    if newmix < 0:  # 0보다 작으면 s +
         start += 1
-    elif take > 0:
+    elif newmix > 0:  # 0보다 크면 e -
         end -= 1
     else:
         break
 
-print(result[0], result[1])
+ans.sort()
+print(ans[0], ans[1])
