@@ -20,4 +20,4 @@ while start < end:
         break
 
 ans.sort()
-print(ans[0], ans[1])
+print(ans[0],ans[1])
