@@ -8,11 +8,11 @@ def dfs(v, color):
     visit[v] = color  # 방문한 v에 색 할당
     for i in tree[v]:
         if visit[i] == 0:  # 안가본곳이면 방문
-            if not dfs(i, -color):
+            if not dfs(i, -color): # 컬러가 같으면 False
                 return False
         elif visit[i] == visit[v]:  # 방문한 곳인데 색이 동일하면 이분그래프가 아니다!
             return False
-    return True
+    return True # 이분 그래프 맞다
 
 
 for _ in range(K):
@@ -31,4 +31,8 @@ for _ in range(K):
             bipartite = dfs(i, 1)
             if not bipartite:
                 break
-    print("YES" if bipartite else "NO")
+    if bipartite:
+        print("YES")
+    else:
+        print("NO")
+
