@@ -1,22 +1,28 @@
+# import sys
+#
+# # 첫줄에 물건의 개수 N , 버틸수있는 무게 K
+# # 두번째 줄부터 물건 무게 W, 가치 V 입력받기
 import sys
 
-# 첫줄에 물건의 개수 N , 버틸수있는 무게 K
-# 두번째 줄부터 물건 무게 W, 가치 V 입력받기
-N, K = map(int, sys.stdin.readline().split())
-item = [[0, 0]]
-bag = [[0 for _ in range(K + 1)] for _ in range(N + 1)]
+n, k = map(int, sys.stdin.readline().split()) # 물건의 개수 n, 버틸수있는 무게 k
+arr = [] # 물건 무게 가치 받아놓을 배열만들어놓기
+for _ in range(n): # 물건의 개수만큼
+    w, v = map(int, sys.stdin.readline().split()) # 무게, 가치
+    arr.append([w, v])
 
-for _ in range(N):
-    item.append(list(map(int, sys.stdin.readline().split())))
+d = [0 for _ in range(k + 1)]  # 무게 리스트
 
-for i in range(1, N + 1):
-    for j in range(1, K + 1):
-        weight = item[i][0]
-        value = item[i][1]
+for item in arr: # arr에 담겨있는 item 하나씩 꺼내온다
+    w, v = item
+    # print(w, v)
+    for i in range(k, w - 1, - 1): # 최대 무게부터 역순으로 물건 무게 체크
+        d[i] = max(d[i], d[i - w] + v) # 현재 물건이랑 가치 합과 최대값 비교
 
-        if j < weight: # 현재 물건이 해당열 무게보다 크다면 담을수없는 물건임으로 [이전물건][현재무게]
-            bag[i][j] = bag[i - 1][j]
-        else:
-            bag[i][j] = max(value + bag[i - 1][j - weight], bag[i - 1][j])
+print(d[-1])
 
-print(bag[N][K])
+
+
+
+
+
+
